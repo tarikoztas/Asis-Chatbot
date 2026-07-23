@@ -1,0 +1,104 @@
+{
+  "intents": [
+    {
+      "id": "dolum_hakedis",
+      "keywords": [
+        "hakediş", "hak ediş", "hakkediş", "dolum hakediş", "bayi hakediş",
+        "dolum", "bayi dolum", "komisyon", "bayi komisyon", "bayi ödeme",
+        "bayi alacak", "alacak", "tahsilat", "mutabakat", "kesinti",
+        "bayi pay", "bayi kazanç", "hakediş raporu", "dolum tutarı",
+        "settlement", "topup", "top up", "bayilerin dolum", "dolum bedeli",
+        "bayi finansal", "hakediş dönemi", "istihkak", "rapor"
+      ],
+      "reply": "Bayi dolum hakedişlerini aşağıdaki sayfadan görüntüleyebilirsiniz:",
+      "link": "/pages/dolum-hakedis.html",
+      "link_text": "Bayi Dolum Hakedişleri"
+    },
+    {
+      "id": "gelir_raporu",
+      "keywords": [
+        "gelir", "gelir raporu", "gelirler", "ciro", "hasılat", "kazanç",
+        "aylık gelir", "finansal rapor", "finans", "mali rapor", "mali tablo",
+        "gelir özeti", "gelir analizi", "kar", "kâr", "bilanço",
+        "eüts gelir", "euts gelir", "toplam gelir", "revenue", "income",
+        "gelir dökümü", "gelir dağılımı", "para", "tutar raporu", "rapor"
+      ],
+      "reply": "EÜTS gelir raporlarına aşağıdaki sayfadan ulaşabilirsiniz:",
+      "link": "/pages/gelir-raporlari.html",
+      "link_text": "Gelir Raporları"
+    },
+    {
+      "id": "yolcu_istatistik",
+      "keywords": [
+        "yolcu", "yolcu sayısı", "yolcu istatistik", "biniş", "biniş sayısı",
+        "binişler", "yolculuk", "sefer", "hat", "hat bazlı", "güzergah",
+        "otobüs", "metro", "tramvay", "toplu taşıma kullanım", "ulaşım istatistik",
+        "istatistik", "yoğunluk", "passenger", "boarding", "yolcu verisi",
+        "günlük biniş", "taşınan yolcu", "yolcu analizi", "kullanım raporu"
+      ],
+      "reply": "Yolcu ve biniş istatistiklerini aşağıdaki sayfadan inceleyebilirsiniz:",
+      "link": "/pages/yolcu-istatistikleri.html",
+      "link_text": "Yolcu İstatistikleri"
+    },
+    {
+      "id": "kart_islemleri",
+      "keywords": [
+        "kart", "kart işlem", "kart dolum", "kart dolumu", "akıllı kart",
+        "ulaşım kartı", "kent kartı", "kart bakiye", "bakiye", "bakiye yükleme",
+        "yükleme", "kart kullanım", "kart hareketleri", "işlem geçmişi",
+        "işlem listesi", "kart raporu", "kart okutma", "validasyon",
+        "card", "transaction", "abonman", "elektronik kart", "temassız",
+        "kart işlemleri", "dolum işlemi", "rapor"
+      ],
+      "reply": "Kart dolum ve işlem raporlarına aşağıdaki sayfadan ulaşabilirsiniz:",
+      "link": "/pages/kart-islemleri.html",
+      "link_text": "Kart İşlemleri"
+    },
+    {
+      "id": "bayi_yonetimi",
+      "keywords": [
+        "bayi", "bayiler", "bayi listesi", "bayilik", "bayi yönetim",
+        "bayi bilgi", "bayi ekle", "yeni bayi", "bayi kayıt", "bayi durumu",
+        "bayi bölge", "satış noktası", "dolum noktası", "dolum merkezi",
+        "acente", "dealer", "bayi ağı", "aktif bayi", "pasif bayi",
+        "bayi adres", "bayi iletişim", "nokta listesi", "gişe"
+      ],
+      "reply": "Bayi listesi ve yönetimine aşağıdaki sayfadan ulaşabilirsiniz:",
+      "link": "/pages/bayi-yonetimi.html",
+      "link_text": "Bayi Yönetimi"
+    },
+    {
+      "id": "iletisim",
+      "keywords": [
+        "iletişim", "ulaş", "ulaşmak", "telefon", "mail", "eposta", "e-posta",
+        "email", "adres", "destek", "yardım", "canlı destek", "müşteri hizmet",
+        "temsilci", "görüşmek", "arayın", "arama", "contact", "support",
+        "şikayet", "öneri", "talep", "form", "bize yazın", "konum", "ofis"
+      ],
+      "reply": "Bizimle iletişime geçmek için aşağıdaki sayfayı kullanabilirsiniz:",
+      "link": "/pages/iletisim.html",
+      "link_text": "İletişim"
+    },
+    {
+      "id": "selamlama",
+      "keywords": [
+        "merhaba", "selam", "selamlar", "günaydın", "iyi günler", "iyi akşamlar",
+        "naber", "hey", "hello", "hi", "sa", "selamun aleyküm",
+        "kolay gelsin", "hoş bulduk"
+      ],
+      "reply": "Merhaba! Ben Asis Asistan. Size hangi konuda yardımcı olabilirim? Örneğin \"bayilerin dolum hakedişini görmek istiyorum\" yazabilirsiniz.",
+      "link": null,
+      "link_text": null
+    },
+    {
+      "id": "tesekkur",
+      "keywords": [
+        "teşekkür", "teşekkürler", "sağol", "sağ ol", "sağolun", "eyvallah",
+        "thanks", "thank you", "çok iyi", "harika", "süper", "mükemmel"
+      ],
+      "reply": "Rica ederim! Başka bir konuda yardımcı olabilirsem yazmanız yeterli. 😊",
+      "link": null,
+      "link_text": null
+    }
+  ]
+}
