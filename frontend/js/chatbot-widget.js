@@ -11,6 +11,8 @@
   "use strict";
 
   const API_URL = "/api/chat";
+  const STORAGE_KEY = "asis-chat-state"; // sessionStorage: sekme kapanınca temizlenir
+  const MAX_HISTORY = 100;
 
   // ---------- Stil ----------
   const style = document.createElement("style");
@@ -105,8 +107,37 @@
   const form = panel.querySelector("#asis-form");
   const input = panel.querySelector("#asis-input");
 
+  // ---------- Kalıcı durum (sessionStorage) ----------
+  // Sohbet geçmişi sayfa geçişlerinde kaybolmasın diye sessionStorage'da tutulur;
+  // sekme kapanınca kendiliğinden silinir.
+  function loadState() {
+    try {
+      const raw = sessionStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const s = JSON.parse(raw);
+        if (s && Array.isArray(s.items)) return s;
+      }
+    } catch (e) {
+      /* bozuk/erişilemeyen storage: sıfırdan başla */
+    }
+    return { open: false, greeted: false, items: [] };
+  }
+
+  const state = loadState();
+
+  function saveState() {
+    if (state.items.length > MAX_HISTORY) {
+      state.items = state.items.slice(-MAX_HISTORY);
+    }
+    try {
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (e) {
+      /* storage dolu/kapalıysa sohbet yine de çalışsın */
+    }
+  }
+
   // ---------- Yardımcılar ----------
-  function addMessage(text, who) {
+  function renderMessage(text, who) {
     const el = document.createElement("div");
     el.className = "asis-msg " + who;
     el.textContent = text;
@@ -115,7 +146,7 @@
     return el;
   }
 
-  function addLinks(links) {
+  function renderLinks(links) {
     if (!links.length) return;
     const wrap = document.createElement("div");
     wrap.className = "asis-links";
@@ -128,6 +159,19 @@
     });
     messagesEl.appendChild(wrap);
     messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
+  function addMessage(text, who) {
+    state.items.push({ type: "msg", who, text });
+    saveState();
+    return renderMessage(text, who);
+  }
+
+  function addLinks(links) {
+    if (!links.length) return;
+    state.items.push({ type: "links", links });
+    saveState();
+    renderLinks(links);
   }
 
   async function sendMessage(text) {
@@ -163,20 +207,25 @@
   }
 
   // ---------- Olaylar ----------
-  let greeted = false;
+  function greetIfNeeded() {
+    if (state.greeted) return;
+    state.greeted = true;
+    addMessage(
+      "Merhaba! 👋 Ben Asis Asistan. Yapmak istediğiniz işlemi yazın, " +
+        "sizi doğru sayfaya yönlendireyim.\n\n" +
+        'Örnek: "Bayilerin dolum hakedişini görmek istiyorum"',
+      "bot"
+    );
+  }
+
   btn.addEventListener("click", () => {
-    panel.classList.toggle("open");
-    if (panel.classList.contains("open")) {
+    const open = panel.classList.toggle("open");
+    state.open = open;
+    saveState();
+    if (open) {
       input.focus();
-      if (!greeted) {
-        greeted = true;
-        addMessage(
-          "Merhaba! 👋 Ben Asis Asistan. Yapmak istediğiniz işlemi yazın, " +
-            "sizi doğru sayfaya yönlendireyim.\n\n" +
-            'Örnek: "Bayilerin dolum hakedişini görmek istiyorum"',
-          "bot"
-        );
-      }
+      greetIfNeeded();
+      messagesEl.scrollTop = messagesEl.scrollHeight;
     }
   });
 
@@ -187,4 +236,15 @@
     input.value = "";
     sendMessage(text);
   });
+
+  // ---------- Önceki sayfadan kalan sohbeti geri yükle ----------
+  state.items.forEach((item) => {
+    if (item.type === "msg") renderMessage(item.text, item.who);
+    else if (item.type === "links") renderLinks(item.links || []);
+  });
+  if (state.open) {
+    panel.classList.add("open");
+    greetIfNeeded();
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
 })();
