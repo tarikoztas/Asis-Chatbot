@@ -303,6 +303,82 @@ td.num, th.num {
   color: var(--danger);
 }
 
+/* ---------- Filtre çubuğu (dinamik rapor sayfaları) ---------- */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px 18px;
+  margin-bottom: 22px;
+}
+
+.filter-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.filter-field label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.filter-field input,
+.filter-field select {
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font: inherit;
+  font-size: 0.88rem;
+  background: var(--surface);
+  min-width: 150px;
+}
+
+.filter-field input:focus,
+.filter-field select:focus {
+  outline: 2px solid var(--accent);
+  border-color: transparent;
+}
+
+.filter-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn.btn-sm {
+  padding: 9px 18px;
+  font-size: 0.88rem;
+}
+
+.btn.btn-ghost {
+  background: var(--accent-soft);
+  color: var(--primary);
+}
+
+.btn.btn-ghost:hover {
+  background: #d3eafc;
+}
+
+.loading-row td,
+.empty-cell {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 26px 16px;
+}
+
+.table-note {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  padding: 10px 16px;
+  border-top: 1px solid var(--border);
+}
+
 /* ---------- İletişim formu ---------- */
 .form-card {
   background: var(--surface);

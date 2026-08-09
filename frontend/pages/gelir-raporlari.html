@@ -22,19 +22,21 @@
     </div>
   </nav>
 
-  <main class="container">
+  <main class="container" data-report-id="gelir-raporlari">
     <a class="back-link" href="/">← Ana Sayfa</a>
     <div class="page-header">
       <h1>📈 EÜTS Gelir Raporları</h1>
-      <p>2026 yılı aylık gelir özeti — tüm ulaşım modları</p>
+      <p id="asis-report-period">Aylık gelir özeti — tüm ulaşım modları</p>
     </div>
 
     <div class="stat-grid">
-      <div class="stat"><div class="label">Yıllık Toplam (7 Ay)</div><div class="value">₺94,2 Mn</div></div>
-      <div class="stat"><div class="label">Aylık Ortalama</div><div class="value">₺13,5 Mn</div></div>
-      <div class="stat"><div class="label">En Yüksek Ay</div><div class="value">Mayıs</div></div>
-      <div class="stat"><div class="label">Yıllık Büyüme</div><div class="value">%12,4</div></div>
+      <div class="stat"><div class="label">Toplam Gelir</div><div class="value">—</div></div>
+      <div class="stat"><div class="label">Aylık Ortalama</div><div class="value">—</div></div>
+      <div class="stat"><div class="label">En Yüksek Ay</div><div class="value">—</div></div>
+      <div class="stat"><div class="label">Dönem Değişimi</div><div class="value">—</div></div>
     </div>
+
+    <div class="filter-bar" id="asis-filter-bar"></div>
 
     <div class="table-wrap">
       <table>
@@ -49,13 +51,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td>Ocak 2026</td><td class="num">₺6.214.500</td><td class="num">₺4.108.200</td><td class="num">₺1.842.700</td><td class="num">₺12.165.400</td><td class="num">—</td></tr>
-          <tr><td>Şubat 2026</td><td class="num">₺6.098.300</td><td class="num">₺4.001.550</td><td class="num">₺1.790.400</td><td class="num">₺11.890.250</td><td class="num">-%2,3</td></tr>
-          <tr><td>Mart 2026</td><td class="num">₺6.742.100</td><td class="num">₺4.385.900</td><td class="num">₺1.998.200</td><td class="num">₺13.126.200</td><td class="num">+%10,4</td></tr>
-          <tr><td>Nisan 2026</td><td class="num">₺6.910.800</td><td class="num">₺4.512.300</td><td class="num">₺2.077.500</td><td class="num">₺13.500.600</td><td class="num">+%2,9</td></tr>
-          <tr><td>Mayıs 2026</td><td class="num">₺7.354.200</td><td class="num">₺4.798.100</td><td class="num">₺2.214.800</td><td class="num">₺14.367.100</td><td class="num">+%6,4</td></tr>
-          <tr><td>Haziran 2026</td><td class="num">₺7.102.900</td><td class="num">₺4.655.400</td><td class="num">₺2.145.300</td><td class="num">₺13.903.600</td><td class="num">-%3,2</td></tr>
-          <tr><td>Temmuz 2026 (devam)</td><td class="num">₺5.421.700</td><td class="num">₺3.512.800</td><td class="num">₺1.620.900</td><td class="num">₺10.555.400</td><td class="num">—</td></tr>
+          <tr class="loading-row"><td colspan="6">Yükleniyor…</td></tr>
         </tbody>
       </table>
     </div>
@@ -64,6 +60,7 @@
   <footer>© 2026 Asis Elektronik ve Bilişim Sistemleri — EÜTS Rapor Portalı (Demo)</footer>
 
   <script src="/js/main.js"></script>
+  <script src="/js/report-page.js"></script>
   <script src="/js/chatbot-widget.js"></script>
 </body>
 </html>

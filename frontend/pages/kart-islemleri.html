@@ -22,19 +22,21 @@
     </div>
   </nav>
 
-  <main class="container">
+  <main class="container" data-report-id="kart-islemleri">
     <a class="back-link" href="/">← Ana Sayfa</a>
     <div class="page-header">
       <h1>💳 Kart İşlemleri</h1>
-      <p>Son akıllı kart dolum ve kullanım işlemleri — 23 Temmuz 2026</p>
+      <p id="asis-report-period">Akıllı kart dolum ve kullanım işlemleri</p>
     </div>
 
     <div class="stat-grid">
-      <div class="stat"><div class="label">Bugünkü İşlem</div><div class="value">184.320</div></div>
-      <div class="stat"><div class="label">Bugünkü Dolum</div><div class="value">₺1.276.400</div></div>
-      <div class="stat"><div class="label">Aktif Kart</div><div class="value">2,4 Mn</div></div>
-      <div class="stat"><div class="label">Ortalama Dolum</div><div class="value">₺148</div></div>
+      <div class="stat"><div class="label">Toplam İşlem</div><div class="value">—</div></div>
+      <div class="stat"><div class="label">Toplam Dolum</div><div class="value">—</div></div>
+      <div class="stat"><div class="label">Aktif Kart</div><div class="value">—</div></div>
+      <div class="stat"><div class="label">Ortalama Dolum</div><div class="value">—</div></div>
     </div>
+
+    <div class="filter-bar" id="asis-filter-bar"></div>
 
     <div class="table-wrap">
       <table>
@@ -45,19 +47,12 @@
             <th>İşlem Tipi</th>
             <th>Nokta / Hat</th>
             <th class="num">Tutar</th>
+            <th>Tarih</th>
             <th>Saat</th>
           </tr>
         </thead>
         <tbody>
-          <tr><td>TX-908341</td><td>5312 **** 8804</td><td>Dolum</td><td>BY-1001 Merkez Büfe</td><td class="num">₺200,00</td><td>14:42</td></tr>
-          <tr><td>TX-908340</td><td>5312 **** 2217</td><td>Biniş</td><td>34 Metrobüs</td><td class="num">₺27,50</td><td>14:41</td></tr>
-          <tr><td>TX-908339</td><td>5312 **** 6530</td><td>Biniş</td><td>M4 Metro</td><td class="num">₺27,50</td><td>14:41</td></tr>
-          <tr><td>TX-908338</td><td>5312 **** 1948</td><td>Dolum</td><td>BY-1004 Sahil Büfe</td><td class="num">₺150,00</td><td>14:40</td></tr>
-          <tr><td>TX-908337</td><td>5312 **** 7521</td><td>Aktarma</td><td>T1 Tramvay</td><td class="num">₺13,75</td><td>14:39</td></tr>
-          <tr><td>TX-908336</td><td>5312 **** 3390</td><td>Biniş</td><td>500T Otobüs</td><td class="num">₺27,50</td><td>14:38</td></tr>
-          <tr><td>TX-908335</td><td>5312 **** 5567</td><td>Dolum</td><td>Mobil Uygulama</td><td class="num">₺300,00</td><td>14:37</td></tr>
-          <tr><td>TX-908334</td><td>5312 **** 9012</td><td>Biniş (İndirimli)</td><td>M2 Metro</td><td class="num">₺13,35</td><td>14:36</td></tr>
-          <tr><td>TX-908333</td><td>5312 **** 4485</td><td>Dolum</td><td>BY-1002 Gar Market</td><td class="num">₺100,00</td><td>14:35</td></tr>
+          <tr class="loading-row"><td colspan="7">Yükleniyor…</td></tr>
         </tbody>
       </table>
     </div>
@@ -66,6 +61,7 @@
   <footer>© 2026 Asis Elektronik ve Bilişim Sistemleri — EÜTS Rapor Portalı (Demo)</footer>
 
   <script src="/js/main.js"></script>
+  <script src="/js/report-page.js"></script>
   <script src="/js/chatbot-widget.js"></script>
 </body>
 </html>

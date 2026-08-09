@@ -12,7 +12,16 @@
 
   const API_URL = "/api/chat";
   const STORAGE_KEY = "asis-chat-state"; // sessionStorage: sekme kapanınca temizlenir
+  // Farklı sayfadayken toplanan filtrenin hedef sayfaya taşındığı el sıkışma
+  // anahtarı; report-page.js açılışta okuyup siler.
+  const PENDING_KEY = "asis-pending-filter";
   const MAX_HISTORY = 100;
+
+  // Bulunulan sayfa bir rapor sayfasıysa onun report_id'si
+  function currentReportId() {
+    const el = document.querySelector("[data-report-id]");
+    return el ? el.dataset.reportId : null;
+  }
 
   // ---------- Stil ----------
   const style = document.createElement("style");
@@ -115,12 +124,17 @@
       const raw = sessionStorage.getItem(STORAGE_KEY);
       if (raw) {
         const s = JSON.parse(raw);
-        if (s && Array.isArray(s.items)) return s;
+        if (s && Array.isArray(s.items)) {
+          // v1 durum şekline tolerans: yeni alanları varsayılanla tamamla
+          s.lastReport = s.lastReport || null;
+          s.pendingFilters = s.pendingFilters || null;
+          return s;
+        }
       }
     } catch (e) {
       /* bozuk/erişilemeyen storage: sıfırdan başla */
     }
-    return { open: false, greeted: false, items: [] };
+    return { open: false, greeted: false, items: [], lastReport: null, pendingFilters: null };
   }
 
   const state = loadState();
@@ -186,12 +200,20 @@
       const res = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: text }),
+        body: JSON.stringify({
+          message: text,
+          context: {
+            path: window.location.pathname,
+            report_id: currentReportId(),
+            last_report_id: state.lastReport ? state.lastReport.report_id : null,
+          },
+        }),
       });
       if (!res.ok) throw new Error("HTTP " + res.status);
       const data = await res.json();
       typing.remove();
       addMessage(data.reply, "bot");
+      handleActions(data);
 
       const links = [];
       if (data.link) links.push({ link: data.link, link_text: data.link_text });
@@ -203,6 +225,56 @@
         "Şu anda sunucuya ulaşılamıyor. Lütfen daha sonra tekrar deneyin.",
         "bot"
       );
+    }
+  }
+
+  // ---------- Chatbot aksiyonları (v2: filtre diyaloğu) ----------
+  function writePendingFilter(reportId, filters) {
+    try {
+      sessionStorage.setItem(
+        PENDING_KEY,
+        JSON.stringify({ report_id: reportId, filters })
+      );
+    } catch (e) {
+      /* storage yoksa filtre taşınamaz; link yine de çalışır */
+    }
+  }
+
+  // Filtreyi hedefe ulaştır: kullanıcı zaten o sayfadaysa canlı uygula
+  // (report-page.js "asis:apply-filters" olayını dinler, sayfa yenilenmez);
+  // değilse el sıkışma anahtarına yaz — hedef sayfa açılışta uygular.
+  function deliverFilters(reportId, filters) {
+    if (currentReportId() === reportId) {
+      document.dispatchEvent(
+        new CustomEvent("asis:apply-filters", {
+          detail: { report_id: reportId, filters: filters },
+        })
+      );
+    } else {
+      writePendingFilter(reportId, filters);
+    }
+  }
+
+  function handleActions(data) {
+    if (data.action === "navigate") {
+      state.lastReport = { report_id: data.report_id };
+      // Hedefi belli olmadan bekletilen filtre varsa bu yönlendirmeye kat
+      let filters = data.filters;
+      if (state.pendingFilters) {
+        filters = Object.assign({}, state.pendingFilters, filters || {});
+        state.pendingFilters = null;
+      }
+      saveState();
+      if (filters) deliverFilters(data.report_id, filters);
+    } else if (data.action === "apply_filters") {
+      state.lastReport = { report_id: data.report_id };
+      state.pendingFilters = null;
+      saveState();
+      deliverFilters(data.report_id, data.filters);
+    } else if (data.filters) {
+      // Hedef rapor henüz belirsiz: bir sonraki yönlendirmede kullanılacak
+      state.pendingFilters = data.filters;
+      saveState();
     }
   }
 

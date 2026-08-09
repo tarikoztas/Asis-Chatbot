@@ -1,9 +1,3 @@
-"""Asis Chatbot - FastAPI uygulaması.
-
-/api/chat : Chatbot mesaj endpoint'i
-/         : frontend/ klasöründeki statik site
-"""
-
 from pathlib import Path
 
 from fastapi import FastAPI

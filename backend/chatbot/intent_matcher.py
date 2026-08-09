@@ -1,9 +1,3 @@
-"""Kural tabanlı Türkçe niyet eşleştirme motoru.
-
-Kullanıcı mesajını normalize eder, intents.json'daki anahtar kelimelerle
-skorlar ve en uygun sayfayı (veya öneri listesini) döndürür.
-"""
-
 import json
 import re
 from difflib import SequenceMatcher
