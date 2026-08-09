@@ -60,4 +60,3 @@ Rapor kimlikleri: `dolum-hakedis`, `gelir-raporlari`, `yolcu-istatistikleri`,
 
 ## Proje Detayları
 
-Mimari, rapor API sözleşmesi ve değişiklik günlüğü için `CLAUDE.md` dosyasına bakın.
